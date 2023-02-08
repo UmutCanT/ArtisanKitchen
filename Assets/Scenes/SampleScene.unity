@@ -624,3 +624,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 7
+  rotationSpeed: 10
+--- !u!1 &1502060236 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3294758251327466535, guid: 1c5dda3c7cd3cf742afcade5419faeab,
+    type: 3}
+  m_PrefabInstance: {fileID: 329332635}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1502060237 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6024899996280613204, guid: 1c5dda3c7cd3cf742afcade5419faeab,
+    type: 3}
+  m_PrefabInstance: {fileID: 329332635}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1502060238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1502060236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e6ce3384d25fec42bd2d9cf98f05182, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1302237110}
+  characterAnimator: {fileID: 1502060237}
