@@ -8,22 +8,22 @@ public class Player : MonoBehaviour
 
     [SerializeField] private LayerMask countersLayerMask;
 
-    private IMovementInput movementInput;
+    private PlayerInput playerInput;
     private Vector3 lastInteractDir;
 
     private void Awake()
     {
-        movementInput = GetComponent<IMovementInput>();
+        playerInput = GetComponent<PlayerInput>();
     }
 
-    private void Update()
+    private void Start()
     {
-        HandleInteraction();
+        playerInput.OnInteractAction += PlayerInput_OnInteractAction;
     }
 
-    private void HandleInteraction()
+    private void PlayerInput_OnInteractAction(object sender, System.EventArgs e)
     {
-        Vector2 inputVector = movementInput.GetMovementVectorNormalized();
+        Vector2 inputVector = playerInput.GetMovementVectorNormalized();
         Vector3 moveDir = new Vector3(inputVector.x, 0, inputVector.y);
 
         if (moveDir != Vector3.zero)
@@ -36,6 +36,30 @@ public class Player : MonoBehaviour
             if (raycastHit.transform.TryGetComponent(out ClearCounter clearCounter))
             {
                 clearCounter.Interact();
+            }
+        }
+    }
+
+    private void Update()
+    {
+        HandleInteraction();
+    }
+
+    private void HandleInteraction()
+    {
+        Vector2 inputVector = playerInput.GetMovementVectorNormalized();
+        Vector3 moveDir = new Vector3(inputVector.x, 0, inputVector.y);
+
+        if (moveDir != Vector3.zero)
+        {
+            lastInteractDir = moveDir;
+        }
+
+        if (Physics.Raycast(transform.position, lastInteractDir, out RaycastHit raycastHit, INTERACT_DISTANCE, countersLayerMask))
+        {
+            if (raycastHit.transform.TryGetComponent(out ClearCounter clearCounter))
+            {
+                //clearCounter.Interact();
             }
         }
     }
