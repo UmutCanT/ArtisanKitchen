@@ -6,30 +6,20 @@ public class ClearCounter : MonoBehaviour, ICanCarryKitchenObject
 {
     [SerializeField] private KitchenObjectTemplete objTemp;
     [SerializeField] private Transform counterTopPoint;
-    [SerializeField] private ClearCounter secondOne;
-    [SerializeField] bool testing;
 
     private KitchenObject kitchenObject;
     public KitchenObject KitchenObject { get => kitchenObject; set => kitchenObject = value; }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.T) && testing) 
-        {
-            if(kitchenObject != null)
-            {
-                kitchenObject.SetKitchenObjectParent(secondOne);
-            }
-        }
-    }
-
-
-    public void Interact()
+    public void Interact(Player player)
     {
         if (kitchenObject == null)
         {
             GameObject spawnedKitchenObject = Instantiate(objTemp.Prefab, counterTopPoint);
             spawnedKitchenObject.GetComponent<KitchenObject>().SetKitchenObjectParent(this);
+        }
+        else
+        {
+            kitchenObject.SetKitchenObjectParent(player);
         }       
     }
 

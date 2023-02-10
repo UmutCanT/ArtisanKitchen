@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, ICanCarryKitchenObject
 {
     public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
 
@@ -15,10 +15,14 @@ public class Player : MonoBehaviour
     private const float INTERACT_DISTANCE = 2f;
 
     [SerializeField] private LayerMask countersLayerMask;
+    [SerializeField] private Transform objectHoldingPoint;
 
     private PlayerInput playerInput;
     private ClearCounter selectedCounter;
+    private KitchenObject kitchenObject;
     private Vector3 lastInteractDir;
+
+    public KitchenObject KitchenObject { get => kitchenObject; set => kitchenObject = value; }
 
     private void Awake()
     {
@@ -34,7 +38,7 @@ public class Player : MonoBehaviour
     {
         if(selectedCounter != null)
         {
-            selectedCounter.Interact();
+            selectedCounter.Interact(this);
         }
     }
 
@@ -79,4 +83,10 @@ public class Player : MonoBehaviour
 
         OnSelectedCounterChanged?.Invoke(this, new OnSelectedCounterChangedEventArgs { selectedCounter = selectedCounter });
     }
+
+    public Transform GetParentTransform() => objectHoldingPoint;
+
+    public void ClearKitchenObject() => kitchenObject = null;
+
+    public bool HasKitchenObject() => kitchenObject != null;
 }
