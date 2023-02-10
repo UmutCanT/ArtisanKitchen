@@ -9,7 +9,7 @@ public class KitchenObjectTemplete : ScriptableObject
     [SerializeField] private GameObject prefab;
     [SerializeField] private Sprite sprite;
 
-    public string ObjectName { get => objectName; }
-    public GameObject Prefab { get => prefab; }
-    public Sprite Sprite { get => sprite; }
+    public string ObjectName => objectName;
+    public GameObject Prefab => prefab;
+    public Sprite Sprite => sprite;
 }
