@@ -2,19 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ClearCounter : MonoBehaviour, ICanCarryKitchenObject
+public class ClearCounter : BaseCounter, ICanCarryKitchenObject
 {
-    [SerializeField] private KitchenObjectTemplete objTemp;
+    [SerializeField] private KitchenObjectTemplete kitchenObjectTemplate;
     [SerializeField] private Transform counterTopPoint;
 
     private KitchenObject kitchenObject;
     public KitchenObject KitchenObject { get => kitchenObject; set => kitchenObject = value; }
 
-    public void Interact(Player player)
+    public override void Interact(Player player)
     {
         if (kitchenObject == null)
         {
-            GameObject spawnedKitchenObject = Instantiate(objTemp.Prefab, counterTopPoint);
+            GameObject spawnedKitchenObject = Instantiate(kitchenObjectTemplate.Prefab, counterTopPoint);
             spawnedKitchenObject.GetComponent<KitchenObject>().SetKitchenObjectParent(this);
         }
         else
