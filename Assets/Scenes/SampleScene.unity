@@ -130,6 +130,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5699261676943073915, guid: 739b09a93af91fb4ab402f84dcf52d83,
+        type: 3}
+      propertyPath: kitchenObjectTemplate
+      value: 
+      objectReference: {fileID: 11400000, guid: ac41099fd0316a44fb48ea53b5b7ae6b,
+        type: 2}
+    - target: {fileID: 7404225089406767116, guid: 739b09a93af91fb4ab402f84dcf52d83,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 91e8fe3de9249fc44b7bdd8050062896,
+        type: 3}
     - target: {fileID: 8973675982079493334, guid: 739b09a93af91fb4ab402f84dcf52d83,
         type: 3}
       propertyPath: m_Name
