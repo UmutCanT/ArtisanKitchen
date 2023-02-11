@@ -9,7 +9,7 @@ public class Player : MonoBehaviour, ICanCarryKitchenObject
 
     public class OnSelectedCounterChangedEventArgs : EventArgs
     {
-        public ClearCounter selectedCounter;
+        public BaseCounter selectedCounter;
     }
 
     private const float INTERACT_DISTANCE = 2f;
@@ -18,7 +18,7 @@ public class Player : MonoBehaviour, ICanCarryKitchenObject
     [SerializeField] private Transform objectHoldingPoint;
 
     private PlayerInput playerInput;
-    private ClearCounter selectedCounter;
+    private BaseCounter selectedCounter;
     private KitchenObject kitchenObject;
     private Vector3 lastInteractDir;
 
@@ -59,11 +59,11 @@ public class Player : MonoBehaviour, ICanCarryKitchenObject
 
         if (Physics.Raycast(transform.position, lastInteractDir, out RaycastHit raycastHit, INTERACT_DISTANCE, countersLayerMask))
         {
-            if (raycastHit.transform.TryGetComponent(out ClearCounter clearCounter))
+            if (raycastHit.transform.TryGetComponent(out BaseCounter baseCounter))
             {
-                if (clearCounter != selectedCounter)
+                if (baseCounter != selectedCounter)
                 {
-                    ChangeSelectedCounter(clearCounter);                   
+                    ChangeSelectedCounter(baseCounter);                   
                 }
             }
             else
@@ -77,7 +77,7 @@ public class Player : MonoBehaviour, ICanCarryKitchenObject
         }
     }
 
-    private void ChangeSelectedCounter(ClearCounter selectedCounter)
+    private void ChangeSelectedCounter(BaseCounter selectedCounter)
     {
         this.selectedCounter = selectedCounter;
 
