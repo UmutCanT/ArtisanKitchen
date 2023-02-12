@@ -32,6 +32,15 @@ public class Player : MonoBehaviour, ICanCarryKitchenObject
     private void Start()
     {
         playerInput.OnInteractAction += PlayerInput_OnInteractAction;
+        playerInput.OnInteractAlternateAction += PlayerInput_OnInteractAlternateAction;
+    }
+
+    private void PlayerInput_OnInteractAlternateAction(object sender, EventArgs e)
+    {
+        if (selectedCounter != null)
+        {
+            selectedCounter.InteractAlternate(this);
+        }
     }
 
     private void PlayerInput_OnInteractAction(object sender, System.EventArgs e)
