@@ -22,7 +22,7 @@ public class Player : MonoBehaviour, ICanCarryKitchenObject
     private KitchenObject kitchenObject;
     private Vector3 lastInteractDir;
 
-    public KitchenObject KitchenObject { get => kitchenObject; set => kitchenObject = value; }
+    public KitchenObject KitchenObj { get => kitchenObject; set => kitchenObject = value; }
 
     private void Awake()
     {

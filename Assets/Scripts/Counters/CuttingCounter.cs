@@ -12,7 +12,7 @@ public class CuttingCounter : BaseCounter
         {
             if (player.HasKitchenObject())
             {
-                player.KitchenObject.SetKitchenObjectParent(this);
+                player.KitchenObj.SetKitchenObjectParent(this);
             }
         }
         else
@@ -23,7 +23,7 @@ public class CuttingCounter : BaseCounter
             }
             else
             {
-                KitchenObject.SetKitchenObjectParent(player);
+                KitchenObj.SetKitchenObjectParent(player);
             }
         }
     }
@@ -32,9 +32,8 @@ public class CuttingCounter : BaseCounter
     {
         if (HasKitchenObject())
         {
-            KitchenObject.RemovingItself();
-            GameObject spawnedKitchenObject = Instantiate(processedObject.Prefab);
-            spawnedKitchenObject.GetComponent<KitchenObject>().SetKitchenObjectParent(this);
+            KitchenObj.RemovingItself();
+            KitchenObject.SpawnKitchenObject(processedObject, this);
         }
     }
 }

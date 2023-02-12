@@ -7,7 +7,7 @@ public class BaseCounter : MonoBehaviour, ICanCarryKitchenObject
     [SerializeField] private Transform counterTopPoint;
 
     private KitchenObject kitchenObject;
-    public KitchenObject KitchenObject { get => kitchenObject; set => kitchenObject = value; }
+    public KitchenObject KitchenObj { get => kitchenObject; set => kitchenObject = value; }
 
     public virtual void Interact(Player player) 
     {
