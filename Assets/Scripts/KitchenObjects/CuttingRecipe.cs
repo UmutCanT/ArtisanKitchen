@@ -5,9 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "CuttingRecipe", menuName = "Cutting Recipes/Create new recipe")]
 public class CuttingRecipe : ScriptableObject
 {
-    [SerializeField] private KitchenObjectTemplete rawObj;
-    [SerializeField] private KitchenObjectTemplete processedObj;
+    [SerializeField] private KitchenObjectTemplate rawObj;
+    [SerializeField] private KitchenObjectTemplate processedObj;
 
-    public KitchenObjectTemplete RawObj => rawObj; 
-    public KitchenObjectTemplete ProcessedObj => processedObj;
+    public KitchenObjectTemplate RawObj => rawObj; 
+    public KitchenObjectTemplate ProcessedObj => processedObj;
 }

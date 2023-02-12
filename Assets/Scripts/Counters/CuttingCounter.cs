@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CuttingCounter : BaseCounter
 {
-    [SerializeField] KitchenObjectTemplete processedObject;
+    [SerializeField] CuttingRecipe[] cuttingRecipes;
 
     public override void Interact(Player player)
     {
@@ -32,8 +32,21 @@ public class CuttingCounter : BaseCounter
     {
         if (HasKitchenObject())
         {
+            KitchenObjectTemplate processedObj = GetProcessedKitchenObject(KitchenObj.ObjectTemplate);
             KitchenObj.RemovingItself();
-            KitchenObject.SpawnKitchenObject(processedObject, this);
+            KitchenObject.SpawnKitchenObject(processedObj, this);
         }
+    }
+    
+    private KitchenObjectTemplate GetProcessedKitchenObject(KitchenObjectTemplate rawObj)
+    {
+        foreach (CuttingRecipe recipe in cuttingRecipes)
+        {
+            if (recipe.RawObj == rawObj)
+            {
+                return recipe.ProcessedObj;
+            }
+        }
+        return null;
     }
 }
