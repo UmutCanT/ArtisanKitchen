@@ -12,6 +12,10 @@ public class CuttingCounter : BaseCounter
         {
             if (player.HasKitchenObject())
             {
+                //if (RawObjectHasRecipe(player.KitchenObj.ObjectTemplate))
+                //{
+                //    Add this part if u want to disable putting not cuttable objects
+                //}
                 player.KitchenObj.SetKitchenObjectParent(this);
             }
         }
@@ -30,12 +34,24 @@ public class CuttingCounter : BaseCounter
 
     public override void InteractAlternate(Player player)
     {
-        if (HasKitchenObject())
+        if (HasKitchenObject() && RawObjectHasRecipe(KitchenObj.ObjectTemplate))
         {
             KitchenObjectTemplate processedObj = GetProcessedKitchenObject(KitchenObj.ObjectTemplate);
             KitchenObj.RemovingItself();
             KitchenObject.SpawnKitchenObject(processedObj, this);
         }
+    }
+
+    private bool RawObjectHasRecipe(KitchenObjectTemplate rawObj)
+    {
+        foreach (CuttingRecipe recipe in cuttingRecipes)
+        {
+            if (recipe.RawObj == rawObj)
+            {
+                return true;
+            }
+        }
+        return false;
     }
     
     private KitchenObjectTemplate GetProcessedKitchenObject(KitchenObjectTemplate rawObj)
