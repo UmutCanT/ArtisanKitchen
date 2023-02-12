@@ -22,7 +22,7 @@ public class Player : MonoBehaviour, ICanCarryKitchenObject
     private KitchenObject kitchenObject;
     private Vector3 lastInteractDir;
 
-    public KitchenObject KitchenObject { get => kitchenObject; set => kitchenObject = value; }
+    public KitchenObject KitchenObj { get => kitchenObject; set => kitchenObject = value; }
 
     private void Awake()
     {
@@ -32,6 +32,15 @@ public class Player : MonoBehaviour, ICanCarryKitchenObject
     private void Start()
     {
         playerInput.OnInteractAction += PlayerInput_OnInteractAction;
+        playerInput.OnInteractAlternateAction += PlayerInput_OnInteractAlternateAction;
+    }
+
+    private void PlayerInput_OnInteractAlternateAction(object sender, EventArgs e)
+    {
+        if (selectedCounter != null)
+        {
+            selectedCounter.InteractAlternate(this);
+        }
     }
 
     private void PlayerInput_OnInteractAction(object sender, System.EventArgs e)

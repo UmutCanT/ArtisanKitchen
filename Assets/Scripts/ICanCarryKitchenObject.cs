@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface ICanCarryKitchenObject
 {
-    KitchenObject KitchenObject { get; set;}
+    KitchenObject KitchenObj { get; set;}
 
     Transform GetParentTransform();
     public void ClearKitchenObject();

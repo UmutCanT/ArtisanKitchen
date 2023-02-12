@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ClearCounter : BaseCounter
+public class CuttingCounter : BaseCounter
 {
-    [SerializeField] private KitchenObjectTemplete kitchenObjectTemplate;
+    [SerializeField] KitchenObjectTemplete processedObject;
 
     public override void Interact(Player player)
     {
@@ -25,6 +25,15 @@ public class ClearCounter : BaseCounter
             {
                 KitchenObj.SetKitchenObjectParent(player);
             }
+        }
+    }
+
+    public override void InteractAlternate(Player player)
+    {
+        if (HasKitchenObject())
+        {
+            KitchenObj.RemovingItself();
+            KitchenObject.SpawnKitchenObject(processedObject, this);
         }
     }
 }
