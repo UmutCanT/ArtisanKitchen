@@ -28,6 +28,11 @@ public class CharacterMovement : MonoBehaviour
         return !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * PATH_CHECK_HEIGHT, PATH_CHECK_RADIUS, moveDir, moveDistance);
     }
 
+    private bool CanMove(float axis, Vector3 moveDir, float moveDistance)
+    {
+        return axis != 0 && CanMove(moveDir, moveDistance);
+    }
+
     private void Movement()
     {
         Vector2 inputVector = movementInput.GetMovementVectorNormalized();
@@ -40,7 +45,7 @@ public class CharacterMovement : MonoBehaviour
             //Attempt only X direction
             Vector3 moveDirX = new Vector3(moveDir.x, 0, 0).normalized;
 
-            if (CanMove(moveDirX, moveDistance))
+            if (CanMove(moveDir.x, moveDirX, moveDistance))
             {
                 moveDir = moveDirX;
             }
@@ -50,7 +55,7 @@ public class CharacterMovement : MonoBehaviour
                 //Attempt only Z direction
                 Vector3 moveDirZ = new Vector3(0, 0, moveDir.z).normalized;
 
-                if (CanMove(moveDirZ, moveDistance))
+                if (CanMove(moveDir.z, moveDirZ, moveDistance))
                 {
                     moveDir = moveDirZ;
                 }
