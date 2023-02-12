@@ -7,7 +7,9 @@ public class CuttingRecipe : ScriptableObject
 {
     [SerializeField] private KitchenObjectTemplate rawObj;
     [SerializeField] private KitchenObjectTemplate processedObj;
+    [SerializeField] int numberOfStepsToProcess;
 
     public KitchenObjectTemplate RawObj => rawObj; 
     public KitchenObjectTemplate ProcessedObj => processedObj;
+    public int NumberOfStepsToProcess => numberOfStepsToProcess;
 }

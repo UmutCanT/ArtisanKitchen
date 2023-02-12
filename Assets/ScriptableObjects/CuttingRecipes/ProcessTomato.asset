@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rawObj: {fileID: 11400000, guid: ac41099fd0316a44fb48ea53b5b7ae6b, type: 2}
   processedObj: {fileID: 11400000, guid: 7f950f15cfe7d1840b879024d0cd6c0b, type: 2}
+  numberOfStepsToProcess: 3
