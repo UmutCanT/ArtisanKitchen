@@ -6,6 +6,7 @@ using UnityEngine;
 public class CuttingCounter : BaseCounter
 {
     public event EventHandler<OnProgressChangedEventArgs> OnProgressChanged;
+    public event EventHandler OnCut;
 
     public class OnProgressChangedEventArgs : EventArgs
     {
@@ -51,9 +52,10 @@ public class CuttingCounter : BaseCounter
     {
         if (HasKitchenObject() && RawObjectHasRecipe(KitchenObj.ObjectTemplate))
         {
-            CuttingRecipe cuttingRecipe = GetRecipeWithRawObj(KitchenObj.ObjectTemplate);
             cuttingProgress++;
+            CuttingRecipe cuttingRecipe = GetRecipeWithRawObj(KitchenObj.ObjectTemplate);
 
+            OnCut?.Invoke(this, EventArgs.Empty);
             OnProgressChanged?.Invoke(this, new OnProgressChangedEventArgs
             {
                 progressNormalized = (float)cuttingProgress / cuttingRecipe.NumberOfStepsToProcess
