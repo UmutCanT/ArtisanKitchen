@@ -11,7 +11,7 @@ PrefabInstance:
         type: 3}
       propertyPath: kitchenObjectTemplate
       value: 
-      objectReference: {fileID: 11400000, guid: f846684047386494782dd3c4e58f5853,
+      objectReference: {fileID: 11400000, guid: 3f7d1de4b46d8eb49911120c944ba9dd,
         type: 2}
     - target: {fileID: 7404225089406767116, guid: 739b09a93af91fb4ab402f84dcf52d83,
         type: 3}

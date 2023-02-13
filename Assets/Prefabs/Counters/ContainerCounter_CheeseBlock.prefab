@@ -7,10 +7,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5699261676943073915, guid: 739b09a93af91fb4ab402f84dcf52d83,
+        type: 3}
+      propertyPath: kitchenObjectTemplate
+      value: 
+      objectReference: {fileID: 11400000, guid: a9cf493e6662a024eae9a95db55895bb,
+        type: 2}
     - target: {fileID: 8973675982079493334, guid: 739b09a93af91fb4ab402f84dcf52d83,
         type: 3}
       propertyPath: m_Name
-      value: ContainerCounter
+      value: ContainerCounter_CheeseBlock
       objectReference: {fileID: 0}
     - target: {fileID: 8973675982079493335, guid: 739b09a93af91fb4ab402f84dcf52d83,
         type: 3}

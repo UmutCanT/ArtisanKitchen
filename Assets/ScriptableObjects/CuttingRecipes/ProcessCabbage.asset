@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e841c64d90f86b44f880abee9fb7d059, type: 3}
-  m_Name: Bread
+  m_Script: {fileID: 11500000, guid: 9e0e77bce25cb3548aaae8abc136cd4d, type: 3}
+  m_Name: ProcessCabbage
   m_EditorClassIdentifier: 
-  objectName: Bread
-  prefab: {fileID: 8535625841102888173, guid: d0d07403f72aff741bb67721a86271f7, type: 3}
-  sprite: {fileID: 21300000, guid: 77b28124b8bda494381c80bd5aa42c22, type: 3}
+  rawObj: {fileID: 11400000, guid: a1aff549f1103994aab921f8a517e85a, type: 2}
+  processedObj: {fileID: 11400000, guid: 0c6c915e3f375df46a914a8251bc5e77, type: 2}
+  numberOfStepsToProcess: 5

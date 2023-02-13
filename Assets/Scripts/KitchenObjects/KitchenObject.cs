@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class KitchenObject : MonoBehaviour
 {
-    [SerializeField] private KitchenObjectTemplete objectTemplete;
+    [SerializeField] private KitchenObjectTemplate objectTemplate;
 
     private ICanCarryKitchenObject kitchenObjectParent;
 
-    public KitchenObjectTemplete ObjectTemplete => objectTemplete;
+    public KitchenObjectTemplate ObjectTemplate => objectTemplate;
 
-    public static KitchenObject SpawnKitchenObject(KitchenObjectTemplete objectTemplete, ICanCarryKitchenObject parent)
+    public static KitchenObject SpawnKitchenObject(KitchenObjectTemplate objectTemplate, ICanCarryKitchenObject parent)
     {
-        GameObject spawnedKitchenObject = Instantiate(objectTemplete.Prefab);
+        GameObject spawnedKitchenObject = Instantiate(objectTemplate.Prefab);
         KitchenObject kitchenObject = spawnedKitchenObject.GetComponent<KitchenObject>();
         kitchenObject.SetKitchenObjectParent(parent);
         return kitchenObject;

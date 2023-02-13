@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "KitchenObjectTemplete", menuName = "Kitchen Objects/Create new KitchenObjectTemplete")]
-public class KitchenObjectTemplete : ScriptableObject
+[CreateAssetMenu(fileName = "KitchenObjectTemplate", menuName = "Kitchen Objects/Create new KitchenObjectTemplate")]
+public class KitchenObjectTemplate : ScriptableObject
 {
     [SerializeField] private string objectName;
     [SerializeField] private GameObject prefab;

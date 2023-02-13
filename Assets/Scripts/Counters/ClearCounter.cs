@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class ClearCounter : BaseCounter
 {
-    [SerializeField] private KitchenObjectTemplete kitchenObjectTemplate;
-
     public override void Interact(Player player)
     {
         if (!HasKitchenObject())

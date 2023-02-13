@@ -7,7 +7,7 @@ public class ContainerCounter : BaseCounter
 {
     public event EventHandler OnPlayerOpenContainer;
 
-    [SerializeField] private KitchenObjectTemplete kitchenObjectTemplate;
+    [SerializeField] private KitchenObjectTemplate kitchenObjectTemplate;
 
     public override void Interact(Player player)
     {
