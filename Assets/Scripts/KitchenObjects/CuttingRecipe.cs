@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "CuttingRecipe", menuName = "Cutting Recipes/Create new recipe")]
+[CreateAssetMenu(fileName = "CuttingRecipe", menuName = "Recipes/Create new cutting recipe")]
 public class CuttingRecipe : ScriptableObject
 {
     [SerializeField] private KitchenObjectTemplate rawObj;
     [SerializeField] private KitchenObjectTemplate processedObj;
-    [SerializeField] int numberOfStepsToProcess;
+    [SerializeField] private int numberOfStepsToProcess;
 
     public KitchenObjectTemplate RawObj => rawObj; 
     public KitchenObjectTemplate ProcessedObj => processedObj;
