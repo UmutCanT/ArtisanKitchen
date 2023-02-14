@@ -69,6 +69,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 93af8b85a17635f40a5b76ed82a86c18, type: 3}
+--- !u!1 &56353165126756413 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 17251720544094567, guid: 93af8b85a17635f40a5b76ed82a86c18,
+    type: 3}
+  m_PrefabInstance: {fileID: 69100726077546842}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4558924549906728432 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4589716710238282922, guid: 93af8b85a17635f40a5b76ed82a86c18,
+    type: 3}
+  m_PrefabInstance: {fileID: 69100726077546842}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1192661237451951450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4558924549906728432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 564a13f3542d800409d8d3228d951f6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stoveCounter: {fileID: 7368144055926906219}
+  stoveVisual: {fileID: 56353165126756413}
+  fryingParticles: {fileID: 5226217651594051508}
+--- !u!1 &5226217651594051508 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5220305274835918574, guid: 93af8b85a17635f40a5b76ed82a86c18,
+    type: 3}
+  m_PrefabInstance: {fileID: 69100726077546842}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8085309514640774481
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -181,7 +214,8 @@ MonoBehaviour:
   counterTopPoint: {fileID: 3585596724707520929}
   fryingRecipes:
   - {fileID: 11400000, guid: 3271a3e840142ac4fb6cd56f73feae41, type: 2}
-  - {fileID: 11400000, guid: bd729dfba1b8b4f4f89c9d84bcd85f8b, type: 2}
+  overcookedRecipes:
+  - {fileID: 11400000, guid: 3218353d6d88df04a86f12dc2d7be0b5, type: 2}
 --- !u!1001 &8148856660673224193
 PrefabInstance:
   m_ObjectHideFlags: 0
