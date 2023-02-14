@@ -23,6 +23,11 @@ public class KitchenObject : MonoBehaviour
         this.kitchenObjectParent?.ClearKitchenObject();
 
         this.kitchenObjectParent = kitchenObjectParent;
+
+        if (kitchenObjectParent.HasKitchenObject())
+        {
+            Debug.LogError("Counter already has kitchen object");
+        }
         kitchenObjectParent.KitchenObj = this;
         transform.parent = kitchenObjectParent.GetParentTransform();
         transform.localPosition = Vector3.zero;
