@@ -3,15 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CuttingCounter : BaseCounter
+public class CuttingCounter : BaseCounter, ICanProgress
 {
-    public event EventHandler<OnProgressChangedEventArgs> OnProgressChanged;
+    public event EventHandler<ICanProgress.OnProgressChangedEventArgs> OnProgressChanged;
     public event EventHandler OnCut;
-
-    public class OnProgressChangedEventArgs : EventArgs
-    {
-        public float progressNormalized;
-    }
 
     [SerializeField] private CuttingRecipe[] cuttingRecipes;
     private int cuttingProgress;
@@ -27,7 +22,7 @@ public class CuttingCounter : BaseCounter
                     player.KitchenObj.SetKitchenObjectParent(this);
                     cuttingProgress = 0;
                     CuttingRecipe cuttingRecipe = GetCuttingRecipeWithRawObj(KitchenObj.ObjectTemplate);
-                    OnProgressChanged?.Invoke(this, new OnProgressChangedEventArgs
+                    OnProgressChanged?.Invoke(this, new ICanProgress.OnProgressChangedEventArgs
                     {
                         progressNormalized = (float)cuttingProgress / cuttingRecipe.NumberOfStepsToProcess
                     });
@@ -55,14 +50,14 @@ public class CuttingCounter : BaseCounter
             CuttingRecipe cuttingRecipe = GetCuttingRecipeWithRawObj(KitchenObj.ObjectTemplate);
 
             OnCut?.Invoke(this, EventArgs.Empty);
-            OnProgressChanged?.Invoke(this, new OnProgressChangedEventArgs
+            OnProgressChanged?.Invoke(this, new ICanProgress.OnProgressChangedEventArgs
             {
                 progressNormalized = (float)cuttingProgress / cuttingRecipe.NumberOfStepsToProcess
             });
 
             if (cuttingProgress >= cuttingRecipe.NumberOfStepsToProcess)
             {
-                KitchenObjectTemplate processedObj = GetProcessedKitchenObject(KitchenObj.ObjectTemplate);
+                KitchenObjectTemplate processedObj = GetCuttingRecipeWithRawObj(KitchenObj.ObjectTemplate).ProcessedObj;
                 KitchenObj.RemovingItself();
                 KitchenObject.SpawnKitchenObject(processedObj, this);
             }       
@@ -74,20 +69,7 @@ public class CuttingCounter : BaseCounter
         CuttingRecipe cuttingRecipe = GetCuttingRecipeWithRawObj(rawObj);
         return cuttingRecipe != null;       
     }
-    
-    private KitchenObjectTemplate GetProcessedKitchenObject(KitchenObjectTemplate rawObj)
-    {
-        CuttingRecipe cuttingRecipe = GetCuttingRecipeWithRawObj(rawObj);
-        if (cuttingRecipe != null)
-        {
-            return cuttingRecipe.ProcessedObj;
-        }
-        else
-        {
-            return null;
-        }
-    }
-
+   
     private CuttingRecipe GetCuttingRecipeWithRawObj(KitchenObjectTemplate rawObj) 
     {
         foreach (CuttingRecipe recipe in cuttingRecipes)

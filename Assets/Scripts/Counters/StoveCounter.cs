@@ -115,19 +115,6 @@ public class StoveCounter : BaseCounter
         return fryingRecipe != null;
     }
 
-    private KitchenObjectTemplate GetFryedKitchenObject(KitchenObjectTemplate inputObj)
-    {
-        FryingRecipe fryingRecipe = GetFryingRecipeWithInputObj(inputObj);
-        if (fryingRecipe != null)
-        {
-            return fryingRecipe.FryedObj;
-        }
-        else
-        {
-            return null;
-        }
-    }
-
     private FryingRecipe GetFryingRecipeWithInputObj(KitchenObjectTemplate inputObj)
     {
         foreach (FryingRecipe recipe in fryingRecipes)
