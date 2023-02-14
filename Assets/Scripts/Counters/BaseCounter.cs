@@ -15,7 +15,6 @@ public class BaseCounter : MonoBehaviour, ICanCarryKitchenObject
     }
     public virtual void InteractAlternate(Player player) 
     {
-        Debug.LogError("BaseCounter.InteractAlternate();");
     }
 
     public Transform GetParentTransform() => counterTopPoint;

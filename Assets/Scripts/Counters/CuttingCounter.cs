@@ -22,17 +22,16 @@ public class CuttingCounter : BaseCounter
         {
             if (player.HasKitchenObject())
             {
-                //if (RawObjectHasRecipe(player.KitchenObj.ObjectTemplate))
-                //{
-                //    Add this part if u want to disable putting not cuttable objects
-                //}
-                player.KitchenObj.SetKitchenObjectParent(this);
-                cuttingProgress= 0;
-                CuttingRecipe cuttingRecipe = GetRecipeWithRawObj(KitchenObj.ObjectTemplate);
-                OnProgressChanged?.Invoke(this, new OnProgressChangedEventArgs
+                if (RawObjectHasRecipe(player.KitchenObj.ObjectTemplate))
                 {
-                    progressNormalized = (float)cuttingProgress / cuttingRecipe.NumberOfStepsToProcess
-                });
+                    player.KitchenObj.SetKitchenObjectParent(this);
+                    cuttingProgress = 0;
+                    CuttingRecipe cuttingRecipe = GetCuttingRecipeWithRawObj(KitchenObj.ObjectTemplate);
+                    OnProgressChanged?.Invoke(this, new OnProgressChangedEventArgs
+                    {
+                        progressNormalized = (float)cuttingProgress / cuttingRecipe.NumberOfStepsToProcess
+                    });
+                }             
             }
         }
         else
@@ -53,7 +52,7 @@ public class CuttingCounter : BaseCounter
         if (HasKitchenObject() && RawObjectHasRecipe(KitchenObj.ObjectTemplate))
         {
             cuttingProgress++;
-            CuttingRecipe cuttingRecipe = GetRecipeWithRawObj(KitchenObj.ObjectTemplate);
+            CuttingRecipe cuttingRecipe = GetCuttingRecipeWithRawObj(KitchenObj.ObjectTemplate);
 
             OnCut?.Invoke(this, EventArgs.Empty);
             OnProgressChanged?.Invoke(this, new OnProgressChangedEventArgs
@@ -72,13 +71,13 @@ public class CuttingCounter : BaseCounter
 
     private bool RawObjectHasRecipe(KitchenObjectTemplate rawObj)
     {
-        CuttingRecipe cuttingRecipe = GetRecipeWithRawObj(rawObj);
+        CuttingRecipe cuttingRecipe = GetCuttingRecipeWithRawObj(rawObj);
         return cuttingRecipe != null;       
     }
     
     private KitchenObjectTemplate GetProcessedKitchenObject(KitchenObjectTemplate rawObj)
     {
-        CuttingRecipe cuttingRecipe = GetRecipeWithRawObj(rawObj);
+        CuttingRecipe cuttingRecipe = GetCuttingRecipeWithRawObj(rawObj);
         if (cuttingRecipe != null)
         {
             return cuttingRecipe.ProcessedObj;
@@ -89,7 +88,7 @@ public class CuttingCounter : BaseCounter
         }
     }
 
-    private CuttingRecipe GetRecipeWithRawObj(KitchenObjectTemplate rawObj) 
+    private CuttingRecipe GetCuttingRecipeWithRawObj(KitchenObjectTemplate rawObj) 
     {
         foreach (CuttingRecipe recipe in cuttingRecipes)
         {
