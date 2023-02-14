@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bdd966e59e3d1e428de33cba1c96363, type: 3}
+  m_Name: OvercookedPatty
+  m_EditorClassIdentifier: 
+  inputObj: {fileID: 11400000, guid: 10d3ae3fea77a0b4ba4fbd3c70c67832, type: 2}
+  burnedObj: {fileID: 11400000, guid: b6304f6d73e113a45a2e2ffc67412640, type: 2}
+  totalOvercookTime: 4
