@@ -43,23 +43,35 @@ public class StoveCounter : BaseCounter, ICanProgress
         {
             if (player.HasKitchenObject())
             {
-
+                if (player.KitchenObj.TryGetPlate(out PlateKitchenObject plateKitchenObject))
+                {
+                    if (plateKitchenObject.TryAddIngredient(KitchenObj.ObjectTemplate))
+                    {
+                        KitchenObj.RemovingItself();
+                        ResetFryingProcess();
+                    }
+                }
             }
             else
             {
                 KitchenObj.SetKitchenObjectParent(player);
-                StopAllCoroutines();
-                currentState = State.None;
-                OnProgressChanged?.Invoke(this, new ICanProgress.OnProgressChangedEventArgs
-                {
-                    progressNormalized = 0f
-                });
-                OnStateChange?.Invoke(this, new OnStateChangeEventArgs
-                {
-                    state = currentState
-                });
+                ResetFryingProcess();
             }
         }
+    }
+
+    private void ResetFryingProcess()
+    {
+        StopAllCoroutines();
+        currentState = State.None;
+        OnProgressChanged?.Invoke(this, new ICanProgress.OnProgressChangedEventArgs
+        {
+            progressNormalized = 0f
+        });
+        OnStateChange?.Invoke(this, new OnStateChangeEventArgs
+        {
+            state = currentState
+        });
     }
 
     private IEnumerator Fry()
