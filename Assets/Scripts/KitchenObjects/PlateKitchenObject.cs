@@ -16,6 +16,8 @@ public class PlateKitchenObject : KitchenObject
 
     private List<KitchenObjectTemplate> kitchenObjectTemplates;
 
+    public List<KitchenObjectTemplate> KitchenObjectTemplates => kitchenObjectTemplates;
+
     private void Awake()
     {
         kitchenObjectTemplates = new List<KitchenObjectTemplate>();    
