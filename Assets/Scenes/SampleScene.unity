@@ -2070,6 +2070,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cbbce1935e75624c9eb4dabf117a0dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  avaibleDishRecipes: {fileID: 11400000, guid: e57077db124098d449cc1c7331516b58, type: 2}
 --- !u!1001 &2057379569
 PrefabInstance:
   m_ObjectHideFlags: 0
