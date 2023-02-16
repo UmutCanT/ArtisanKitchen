@@ -1,9 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class DeliveryManager : MonoBehaviour
 {
+    public event EventHandler OnOrderRecived;
+    public event EventHandler OnOrderCompleted;
+
     public static DeliveryManager Instance { get; private set; }
 
     private const float ORDER_INTERVAL = 4f;
@@ -12,8 +17,9 @@ public class DeliveryManager : MonoBehaviour
     [SerializeField] private DishList avaibleDishRecipes;
     
     private List<DishRecipe> waitingOrdersDishRecipes;
-
     private float orderSpawnTimer;
+
+    public List<DishRecipe> WaitingOrdersDishRecipes => waitingOrdersDishRecipes;
 
     private void Awake()
     {
@@ -32,7 +38,7 @@ public class DeliveryManager : MonoBehaviour
             {
                 DishRecipe newOrder = avaibleDishRecipes.DishRecipeList[Random.Range(0, avaibleDishRecipes.DishRecipeList.Count)];
                 waitingOrdersDishRecipes.Add(newOrder);
-                Debug.Log(newOrder.DishName);
+                OnOrderRecived?.Invoke(this, EventArgs.Empty);
             }            
         }
     }
@@ -67,12 +73,11 @@ public class DeliveryManager : MonoBehaviour
 
                 if (correctOrder)
                 {
-                    Debug.Log("Player delivered correct");
                     waitingOrdersDishRecipes.RemoveAt(i);
+                    OnOrderCompleted?.Invoke(this, EventArgs.Empty);
                     return;
                 }
             }
         }
-        Debug.Log("Player didn't delivered correct");
     }
 }
