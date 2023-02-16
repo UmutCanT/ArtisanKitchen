@@ -2112,6 +2112,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 693172858}
+  - component: {fileID: 693172859}
   m_Layer: 5
   m_Name: OrderTemplate
   m_TagString: Untagged
@@ -2141,6 +2142,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 250, y: 100}
   m_Pivot: {x: 0, y: 1}
+--- !u!114 &693172859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693172857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7166e81a44a6a7f42a2c60e4033b97d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orderName: {fileID: 148969837}
 --- !u!1001 &728499956
 PrefabInstance:
   m_ObjectHideFlags: 0

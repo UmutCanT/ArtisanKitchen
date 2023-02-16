@@ -35,7 +35,8 @@ public class DeliverManagerUI : MonoBehaviour
         foreach (DishRecipe dish in DeliveryManager.Instance.WaitingOrdersDishRecipes)
         {
             GameObject orderUI = Instantiate(orderUITemplate, ordersUI.transform);
-            orderUI.SetActive(true);       
+            orderUI.SetActive(true);
+            orderUI.GetComponent<OrderTemplateUI>().SetOrderName(dish);
         }
     }
 
