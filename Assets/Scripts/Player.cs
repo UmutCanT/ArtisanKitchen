@@ -6,6 +6,7 @@ using UnityEngine;
 public class Player : MonoBehaviour, ICanCarryKitchenObject
 {
     public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
+    public static event EventHandler OnObjectPickUp;
 
     public class OnSelectedCounterChangedEventArgs : EventArgs
     {
@@ -22,7 +23,15 @@ public class Player : MonoBehaviour, ICanCarryKitchenObject
     private KitchenObject kitchenObject;
     private Vector3 lastInteractDir;
 
-    public KitchenObject KitchenObj { get => kitchenObject; set => kitchenObject = value; }
+    public KitchenObject KitchenObj { get => kitchenObject; 
+        set 
+        { 
+            kitchenObject = value;
+            if (kitchenObject != null)
+            {
+                OnObjectPickUp?.Invoke(this, EventArgs.Empty);
+            }
+        }}
 
     private void Awake()
     {
