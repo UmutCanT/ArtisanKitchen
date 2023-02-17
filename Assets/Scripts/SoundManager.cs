@@ -16,6 +16,13 @@ public class SoundManager : MonoBehaviour
         Player.OnObjectPickUp += Player_OnObjectPickUp;
         BaseCounter.OnAnyObjectDropped += BaseCounter_OnAnyObjectDropped;
         TrashCounter.OnAnyObjectThrashed += TrashCounter_OnAnyObjectThrashed;
+        PlayerSounds.OnStep += PlayerSounds_OnStep;
+    }
+
+    private void PlayerSounds_OnStep(object sender, System.EventArgs e)
+    {
+        PlayerSounds footStep = sender as PlayerSounds;
+        PlaySoundEffect(audioClipReferences.FootStep, footStep.transform.position);
     }
 
     private void TrashCounter_OnAnyObjectThrashed(object sender, System.EventArgs e)
