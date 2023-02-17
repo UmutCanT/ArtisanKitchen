@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,9 +7,12 @@ public class GameManager : MonoBehaviour
 {   
     public static GameManager Instance { get; private set; }
 
+    public event EventHandler OnGameStateChanged;
+
     private GameStates gameState;
     private float waitingToCountdown = 1f;
     private float countdownToStart = 3f;
+    public float CountdownToStart => countdownToStart;
 
     private void Awake()
     {
@@ -30,6 +34,7 @@ public class GameManager : MonoBehaviour
                 if (waitingToCountdown < 0)
                 {
                     gameState = GameStates.Countdown;
+                    OnGameStateChanged?.Invoke(this, EventArgs.Empty);
                 }
                 break;
             case GameStates.Countdown:
@@ -37,6 +42,7 @@ public class GameManager : MonoBehaviour
                 if (countdownToStart < 0)
                 {
                     gameState = GameStates.GameLoop;
+                    OnGameStateChanged?.Invoke(this, EventArgs.Empty);
                 }
                 break;
             case GameStates.GameLoop:
@@ -50,6 +56,8 @@ public class GameManager : MonoBehaviour
     }
 
     public bool IsGamePlaying() => gameState == GameStates.GameLoop;
+
+    public bool IsCountdown() => gameState == GameStates.Countdown;
 
     public enum GameStates
     {
