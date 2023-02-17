@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
-{   
+{
+    private const float TOTAL_GAME_TIME = 10f;
     public static GameManager Instance { get; private set; }
 
     public event EventHandler OnGameStateChanged;
@@ -12,7 +13,7 @@ public class GameManager : MonoBehaviour
     private GameStates gameState;
     private float waitingToCountdown = 1f;
     private float countdownToStart = 3f;
-    private float testGameLoop = 15f;
+    private float timeLeftToGameOver;
     public float CountdownToStart => countdownToStart;
 
     private void Awake()
@@ -42,13 +43,14 @@ public class GameManager : MonoBehaviour
                 countdownToStart -= Time.deltaTime;
                 if (countdownToStart < 0)
                 {
+                    timeLeftToGameOver = TOTAL_GAME_TIME;
                     gameState = GameStates.GameLoop;
                     OnGameStateChanged?.Invoke(this, EventArgs.Empty);
                 }
                 break;
             case GameStates.GameLoop:
-                testGameLoop -= Time.deltaTime;
-                if (testGameLoop < 0)
+                timeLeftToGameOver -= Time.deltaTime;
+                if (timeLeftToGameOver < 0)
                 {
                     gameState = GameStates.GameOver;
                     OnGameStateChanged?.Invoke(this, EventArgs.Empty);
@@ -67,6 +69,8 @@ public class GameManager : MonoBehaviour
     public bool IsCountdown() => gameState == GameStates.Countdown;
 
     public bool IsGameOver() => gameState == GameStates.GameOver;
+
+    public float LeftTimeAmountNormalizedInverted() => 1 - (timeLeftToGameOver / TOTAL_GAME_TIME);
 
     public enum GameStates
     {
