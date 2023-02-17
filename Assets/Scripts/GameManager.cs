@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     private GameStates gameState;
     private float waitingToCountdown = 1f;
     private float countdownToStart = 3f;
+    private float testGameLoop = 15f;
     public float CountdownToStart => countdownToStart;
 
     private void Awake()
@@ -46,6 +47,12 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case GameStates.GameLoop:
+                testGameLoop -= Time.deltaTime;
+                if (testGameLoop < 0)
+                {
+                    gameState = GameStates.GameOver;
+                    OnGameStateChanged?.Invoke(this, EventArgs.Empty);
+                }
                 break;
             case GameStates.GameOver:
                 break;
@@ -58,6 +65,8 @@ public class GameManager : MonoBehaviour
     public bool IsGamePlaying() => gameState == GameStates.GameLoop;
 
     public bool IsCountdown() => gameState == GameStates.Countdown;
+
+    public bool IsGameOver() => gameState == GameStates.GameOver;
 
     public enum GameStates
     {

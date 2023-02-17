@@ -20,13 +20,20 @@ public class DeliveryManager : MonoBehaviour
     
     private List<DishRecipe> waitingOrdersDishRecipes;
     private float orderSpawnTimer;
+    private int successfulOrderCount;
 
     public List<DishRecipe> WaitingOrdersDishRecipes => waitingOrdersDishRecipes;
+    public int SuccessfulOrderCount => successfulOrderCount;
 
     private void Awake()
     {
         Instance = this;
         waitingOrdersDishRecipes= new List<DishRecipe>();
+    }
+
+    private void Start()
+    {
+        successfulOrderCount = 0;
     }
 
     private void Update()
@@ -76,6 +83,7 @@ public class DeliveryManager : MonoBehaviour
                 if (correctOrder)
                 {
                     waitingOrdersDishRecipes.RemoveAt(i);
+                    successfulOrderCount++;
                     OnOrderCompleted?.Invoke(this, EventArgs.Empty);
                     OnDeliverySuccess?.Invoke(this, EventArgs.Empty);
                     return;
