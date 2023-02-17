@@ -8,6 +8,8 @@ public class DeliveryManager : MonoBehaviour
 {
     public event EventHandler OnOrderRecived;
     public event EventHandler OnOrderCompleted;
+    public event EventHandler OnDeliverySuccess;
+    public event EventHandler OnDeliveryFailed;
 
     public static DeliveryManager Instance { get; private set; }
 
@@ -75,9 +77,11 @@ public class DeliveryManager : MonoBehaviour
                 {
                     waitingOrdersDishRecipes.RemoveAt(i);
                     OnOrderCompleted?.Invoke(this, EventArgs.Empty);
+                    OnDeliverySuccess?.Invoke(this, EventArgs.Empty);
                     return;
                 }
             }
         }
+        OnDeliveryFailed?.Invoke(this, EventArgs.Empty);
     }
 }
