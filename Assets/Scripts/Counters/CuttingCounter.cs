@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class CuttingCounter : BaseCounter, ICanProgress
 {
+    public static event EventHandler OnAnyCut;
     public event EventHandler<ICanProgress.OnProgressChangedEventArgs> OnProgressChanged;
     public event EventHandler OnCut;
 
@@ -56,6 +57,7 @@ public class CuttingCounter : BaseCounter, ICanProgress
             CuttingRecipe cuttingRecipe = GetCuttingRecipeWithRawObj(KitchenObj.ObjectTemplate);
 
             OnCut?.Invoke(this, EventArgs.Empty);
+            OnAnyCut?.Invoke(this, EventArgs.Empty);
             OnProgressChanged?.Invoke(this, new ICanProgress.OnProgressChangedEventArgs
             {
                 progressNormalized = (float)cuttingProgress / cuttingRecipe.NumberOfStepsToProcess
