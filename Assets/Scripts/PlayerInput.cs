@@ -6,7 +6,7 @@ public class PlayerInput : MonoBehaviour, IMovementInput
 {
     public event EventHandler OnInteractAction;
     public event EventHandler OnInteractAlternateAction;
-    public event EventHandler OnPauseAction;
+    //public event EventHandler OnPauseAction;
 
     private PlayerInputActions playerInputActions;
 
@@ -22,7 +22,7 @@ public class PlayerInput : MonoBehaviour, IMovementInput
 
     private void Pause_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
-        OnPauseAction?.Invoke(this, EventArgs.Empty);
+        //OnPauseAction?.Invoke(this, EventArgs.Empty);
         GameManager.Instance.TogglePauseGame();
     }
 

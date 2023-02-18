@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     public event EventHandler OnGameStateChanged;
+    public event EventHandler OnGamePaused;
+    public event EventHandler OnGameUnpaused;
 
     private GameStates gameState;
     private float waitingToCountdown = 1f;
@@ -57,7 +59,6 @@ public class GameManager : MonoBehaviour
             default:
                 break;
         }
-        Debug.Log(gameState.ToString());
     }
 
     public bool IsGamePlaying() => gameState == GameStates.GameLoop;
@@ -74,10 +75,12 @@ public class GameManager : MonoBehaviour
         if (isGamePaused)
         {
             Time.timeScale = 0f;
+            OnGamePaused?.Invoke(this, EventArgs.Empty);
         }
         else
         {
             Time.timeScale = 1f;
+            OnGameUnpaused?.Invoke(this, EventArgs.Empty);
         }
     }
 
