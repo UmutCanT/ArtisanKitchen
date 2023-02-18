@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SoundManager : MonoBehaviour
@@ -17,6 +18,15 @@ public class SoundManager : MonoBehaviour
         BaseCounter.OnAnyObjectDropped += BaseCounter_OnAnyObjectDropped;
         TrashCounter.OnAnyObjectThrashed += TrashCounter_OnAnyObjectThrashed;
         PlayerSounds.OnStep += PlayerSounds_OnStep;
+    }
+
+    private void OnDestroy()
+    {
+        CuttingCounter.OnAnyCut -= CuttingCounter_OnAnyCut;
+        Player.OnObjectPickUp -= Player_OnObjectPickUp;
+        BaseCounter.OnAnyObjectDropped -= BaseCounter_OnAnyObjectDropped;
+        TrashCounter.OnAnyObjectThrashed -= TrashCounter_OnAnyObjectThrashed;
+        PlayerSounds.OnStep -= PlayerSounds_OnStep;
     }
 
     private void PlayerSounds_OnStep(object sender, System.EventArgs e)
