@@ -11,7 +11,6 @@ public class GameTimerClockUI : MonoBehaviour
     {
         GameManager.Instance.OnGameStateChanged += GameManager_OnGameStateChanged;
         UIActive(true);
-        clockImage.fillAmount = 0;
     }
 
     private void Update()
