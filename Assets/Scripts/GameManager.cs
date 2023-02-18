@@ -14,17 +14,13 @@ public class GameManager : MonoBehaviour
     private float waitingToCountdown = 1f;
     private float countdownToStart = 3f;
     private float timeLeftToGameOver;
+    private bool isGamePaused = false;
     public float CountdownToStart => countdownToStart;
 
     private void Awake()
     {
         Instance = this;
         gameState = GameStates.WaitingToCountdown;
-    }
-
-    private void Start()
-    {
-        
     }
 
     private void Update()
@@ -71,6 +67,19 @@ public class GameManager : MonoBehaviour
     public bool IsGameOver() => gameState == GameStates.GameOver;
 
     public float LeftTimeAmountNormalizedInverted() => 1 - (timeLeftToGameOver / TOTAL_GAME_TIME);
+
+    public void TogglePauseGame()
+    {
+        isGamePaused = !isGamePaused;
+        if (isGamePaused)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+        }
+    }
 
     public enum GameStates
     {
