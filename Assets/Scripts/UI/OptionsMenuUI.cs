@@ -16,9 +16,14 @@ public class OptionsMenuUI : MonoBehaviour
 
     private void OnEnable()
     {
+        GameManager.Instance.OnGameUnpaused += GameManager_OnGameUnpaused;
         SoundManager.OnVolumeChange += SoundManager_OnVolumeChange;
-        MusicManager.OnVolumeChange += MusicManager_OnVolumeChange;
-        UIActive(true);
+        MusicManager.OnVolumeChange += MusicManager_OnVolumeChange;       
+    }
+
+    private void Start()
+    {
+        UIActive(false);
     }
 
     private void OnDestroy()
@@ -35,6 +40,11 @@ public class OptionsMenuUI : MonoBehaviour
     private void SoundManager_OnVolumeChange(object sender, SoundManager.OnVolumeChangeEventArgs e)
     {
         sfxText.text = TextUpdate(SFX_TEXT, e.volume);
+    }
+
+    private void GameManager_OnGameUnpaused(object sender, System.EventArgs e)
+    {
+        UIActive(false);
     }
 
     public string TextUpdate (string text, float volume)
