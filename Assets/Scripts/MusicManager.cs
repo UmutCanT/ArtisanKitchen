@@ -18,6 +18,7 @@ public class MusicManager : MonoBehaviour
 
     private void Start()
     {
+        volume = PlayerPreferences.LoadMusicVolume();
         audioSource.volume = volume;
 
         OnVolumeChange?.Invoke(this, new OnVolumeChangeEventArgs
@@ -33,6 +34,7 @@ public class MusicManager : MonoBehaviour
             volume = 0f;
 
         audioSource.volume = volume;
+        PlayerPreferences.SaveMusicVolume(volume);
         OnVolumeChange?.Invoke(this, new OnVolumeChangeEventArgs
         {
             volume = volume

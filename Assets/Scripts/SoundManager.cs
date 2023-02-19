@@ -22,6 +22,8 @@ public class SoundManager : MonoBehaviour
 
     private void Start()
     {
+        volume = PlayerPreferences.LoadSfxVolume();
+
         OnVolumeChange?.Invoke(this, new OnVolumeChangeEventArgs
         {
             volume = volume
@@ -49,6 +51,8 @@ public class SoundManager : MonoBehaviour
         volume += .1f;
         if (volume > 1.01f)
             volume = 0f;
+
+        PlayerPreferences.SaveSfxVolume(volume);
 
         OnVolumeChange?.Invoke(this, new OnVolumeChangeEventArgs 
         { 
