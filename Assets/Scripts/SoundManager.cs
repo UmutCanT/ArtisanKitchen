@@ -1,16 +1,33 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class SoundManager : MonoBehaviour
 {
+    public static event EventHandler<OnVolumeChangeEventArgs> OnVolumeChange;
+
+    public class OnVolumeChangeEventArgs : EventArgs 
+    { 
+        public float volume; 
+    }
+
     private const float DEFAULT_VOLUME = .4f;
 
     [SerializeField] AudioClipReferences audioClipReferences;
 
+    private float volume = 1f;
+
     private void Start()
     {
+        volume = PlayerPreferences.LoadSfxVolume();
+
+        OnVolumeChange?.Invoke(this, new OnVolumeChangeEventArgs
+        {
+            volume = volume
+        });
         DeliveryManager.Instance.OnDeliverySuccess += DeliveryManager_OnDeliverySuccess;
         DeliveryManager.Instance.OnDeliveryFailed += DeliveryManager_OnDeliveryFailed;
         CuttingCounter.OnAnyCut += CuttingCounter_OnAnyCut;
@@ -27,6 +44,20 @@ public class SoundManager : MonoBehaviour
         BaseCounter.OnAnyObjectDropped -= BaseCounter_OnAnyObjectDropped;
         TrashCounter.OnAnyObjectThrashed -= TrashCounter_OnAnyObjectThrashed;
         PlayerSounds.OnStep -= PlayerSounds_OnStep;
+    }
+
+    public void ChangeVolume()
+    {
+        volume += .1f;
+        if (volume > 1.01f)
+            volume = 0f;
+
+        PlayerPreferences.SaveSfxVolume(volume);
+
+        OnVolumeChange?.Invoke(this, new OnVolumeChangeEventArgs 
+        { 
+            volume = volume 
+        });
     }
 
     private void PlayerSounds_OnStep(object sender, System.EventArgs e)
@@ -76,8 +107,8 @@ public class SoundManager : MonoBehaviour
         PlaySoundEffect(audioClipArray[Random.Range(0, audioClipArray.Length)], position, volume);
     }
     
-    private void PlaySoundEffect(AudioClip audioClip, Vector3 position, float volume = DEFAULT_VOLUME)
+    private void PlaySoundEffect(AudioClip audioClip, Vector3 position, float volumeMultiplier = DEFAULT_VOLUME)
     {
-        AudioSource.PlayClipAtPoint(audioClip, position, volume);
+        AudioSource.PlayClipAtPoint(audioClip, position, volumeMultiplier * volume);
     }
 }
