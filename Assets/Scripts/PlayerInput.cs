@@ -21,6 +21,29 @@ public class PlayerInput : MonoBehaviour, IMovementInput
         Pause
     }
 
+    private void Awake()
+    {
+        playerInputActions = new PlayerInputActions();
+        if (PlayerPreferences.InputBindingsHasRecord())
+        {
+            playerInputActions.LoadBindingOverridesFromJson(PlayerPreferences.LoadInputBindings());
+        }
+        playerInputActions.Player.Enable();
+
+        playerInputActions.Player.Interact.performed += Interact_performed;
+        playerInputActions.Player.InteractAlternate.performed += InteractAlternate_performed;
+        playerInputActions.Player.Pause.performed += Pause_performed;        
+    }
+
+    private void OnDestroy()
+    {
+        playerInputActions.Player.Interact.performed -= Interact_performed;
+        playerInputActions.Player.InteractAlternate.performed -= InteractAlternate_performed;
+        playerInputActions.Player.Pause.performed -= Pause_performed;
+
+        playerInputActions.Dispose();
+    }
+
     public string GetBindingText(Binding binding)
     {
         return binding switch
@@ -73,7 +96,7 @@ public class PlayerInput : MonoBehaviour, IMovementInput
             case Binding.Pause:
                 inputAction = playerInputActions.Player.Pause;
                 bindingIndex = 0;
-                break;           
+                break;
         }
 
         inputAction.PerformInteractiveRebinding(bindingIndex).OnComplete(callback =>
@@ -81,27 +104,8 @@ public class PlayerInput : MonoBehaviour, IMovementInput
             callback.Dispose();
             playerInputActions.Player.Enable();
             onActionRebound();
-
+            PlayerPreferences.SaveInputBindings(playerInputActions.SaveBindingOverridesAsJson());
         }).Start();
-    }
-
-    private void Awake()
-    {
-        playerInputActions = new PlayerInputActions();
-        playerInputActions.Player.Enable();
-
-        playerInputActions.Player.Interact.performed += Interact_performed;
-        playerInputActions.Player.InteractAlternate.performed += InteractAlternate_performed;
-        playerInputActions.Player.Pause.performed += Pause_performed;
-    }
-
-    private void OnDestroy()
-    {
-        playerInputActions.Player.Interact.performed -= Interact_performed;
-        playerInputActions.Player.InteractAlternate.performed -= InteractAlternate_performed;
-        playerInputActions.Player.Pause.performed -= Pause_performed;
-
-        playerInputActions.Dispose();
     }
 
     private void Pause_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)

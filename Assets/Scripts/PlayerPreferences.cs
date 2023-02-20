@@ -8,6 +8,9 @@ public static class PlayerPreferences
     private static string PLAYER_MUSIC_VOLUME_PREF = "musicVolume";
     private static float DEFAULT_VOLUME = .5f;
 
+    private static string PLAYER_BINDINGS = "InputBindings";
+
+
     public static void SaveSfxVolume(float volume)
     {
         PlayerPrefs.SetFloat(PLAYER_SFX_VOLUME_PREF, volume);
@@ -26,5 +29,20 @@ public static class PlayerPreferences
     public static float LoadMusicVolume()
     {
         return PlayerPrefs.GetFloat(PLAYER_MUSIC_VOLUME_PREF, DEFAULT_VOLUME);
+    }
+
+    public static void SaveInputBindings(string bindings)
+    {
+        PlayerPrefs.SetString(PLAYER_BINDINGS, bindings);
+    }
+
+    public static bool InputBindingsHasRecord()
+    {
+        return PlayerPrefs.HasKey(PLAYER_BINDINGS);
+    }
+
+    public static string LoadInputBindings()
+    {
+        return PlayerPrefs.GetString(PLAYER_BINDINGS);
     }
 }
