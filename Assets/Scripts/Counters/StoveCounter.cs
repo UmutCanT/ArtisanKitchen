@@ -20,6 +20,9 @@ public class StoveCounter : BaseCounter, ICanProgress
     private FryingRecipe fryingRecipe;
     private OvercookedRecipe overcookedRecipe;
     private float fryingTimer;
+    private readonly float warningProgressAmount = .5f;
+
+    public float WarningProgressAmount => warningProgressAmount;
 
     private void Start()
     {
@@ -166,6 +169,8 @@ public class StoveCounter : BaseCounter, ICanProgress
         }
         return null;
     }
+
+    public bool IsFried() => currentState == State.Fried;
 
     public enum State
     {

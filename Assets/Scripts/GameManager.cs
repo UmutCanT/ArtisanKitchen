@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private const float TOTAL_GAME_TIME = 10f;
+    private const float TOTAL_GAME_TIME = 50f;
     public static GameManager Instance { get; private set; }
 
     public event EventHandler OnGameStateChanged;
