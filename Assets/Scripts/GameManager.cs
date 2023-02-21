@@ -13,7 +13,6 @@ public class GameManager : MonoBehaviour
     public event EventHandler OnGameUnpaused;
 
     private GameStates gameState;
-    private float waitingToCountdown = 1f;
     private float countdownToStart = 3f;
     private float timeLeftToGameOver;
     private bool isGamePaused = false;
@@ -29,13 +28,7 @@ public class GameManager : MonoBehaviour
     {
         switch (gameState)
         {
-            case GameStates.WaitingToCountdown:
-                waitingToCountdown -= Time.deltaTime;
-                if (waitingToCountdown < 0)
-                {
-                    gameState = GameStates.Countdown;
-                    OnGameStateChanged?.Invoke(this, EventArgs.Empty);
-                }
+            case GameStates.WaitingToCountdown:               
                 break;
             case GameStates.Countdown:
                 countdownToStart -= Time.deltaTime;
@@ -58,6 +51,15 @@ public class GameManager : MonoBehaviour
                 break;
             default:
                 break;
+        }
+    }
+
+    public void InteractActionToStartCountdown()
+    {
+        if (gameState == GameStates.WaitingToCountdown)
+        {
+            gameState = GameStates.Countdown;
+            OnGameStateChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 

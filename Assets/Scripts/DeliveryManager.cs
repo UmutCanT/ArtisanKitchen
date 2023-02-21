@@ -43,7 +43,7 @@ public class DeliveryManager : MonoBehaviour
         {
             orderSpawnTimer = ORDER_INTERVAL;
 
-            if (waitingOrdersDishRecipes.Count < MAX_ORDER_COUNT)
+            if (GameManager.Instance.IsGamePlaying() && waitingOrdersDishRecipes.Count < MAX_ORDER_COUNT)
             {
                 DishRecipe newOrder = avaibleDishRecipes.DishRecipeList[Random.Range(0, avaibleDishRecipes.DishRecipeList.Count)];
                 waitingOrdersDishRecipes.Add(newOrder);

@@ -31,8 +31,15 @@ public class PlayerInput : MonoBehaviour, IMovementInput
         playerInputActions.Player.Enable();
 
         playerInputActions.Player.Interact.performed += Interact_performed;
+        playerInputActions.Player.Interact.performed += PressAButtonToStartTheGame;
         playerInputActions.Player.InteractAlternate.performed += InteractAlternate_performed;
         playerInputActions.Player.Pause.performed += Pause_performed;        
+    }
+
+    private void PressAButtonToStartTheGame(InputAction.CallbackContext obj)
+    {
+        GameManager.Instance.InteractActionToStartCountdown();
+        playerInputActions.Player.Interact.performed -= PressAButtonToStartTheGame;
     }
 
     private void OnDestroy()
@@ -108,17 +115,17 @@ public class PlayerInput : MonoBehaviour, IMovementInput
         }).Start();
     }
 
-    private void Pause_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    private void Pause_performed(InputAction.CallbackContext obj)
     {
         GameManager.Instance.TogglePauseGame();
     }
 
-    private void InteractAlternate_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    private void InteractAlternate_performed(InputAction.CallbackContext obj)
     {
         OnInteractAlternateAction?.Invoke(this, EventArgs.Empty);
     }
 
-    private void Interact_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    private void Interact_performed(InputAction.CallbackContext obj)
     {
         OnInteractAction?.Invoke(this, EventArgs.Empty);
     }
