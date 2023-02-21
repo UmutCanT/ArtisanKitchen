@@ -30,7 +30,7 @@ public class CharacterMovement : MonoBehaviour
 
     private bool CanMove(float axis, Vector3 moveDir, float moveDistance)
     {
-        return axis != 0 && CanMove(moveDir, moveDistance);
+        return (axis < -.5f || axis > .5f) && CanMove(moveDir, moveDistance);
     }
 
     private void Movement()

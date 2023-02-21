@@ -44,20 +44,21 @@ public class OptionsMenuUI : MonoBehaviour
 
     private void OnEnable()
     {
-        GameManager.Instance.OnGameUnpaused += GameManager_OnGameUnpaused;
-        SoundManager.OnVolumeChange += SoundManager_OnVolumeChange;
-        MusicManager.OnVolumeChange += MusicManager_OnVolumeChange;
-        moveUpButton.onClick.AddListener(() => {RebindBinding(PlayerInput.Binding.Move_Up);});
-        moveDownButton.onClick.AddListener(() => {RebindBinding(PlayerInput.Binding.Move_Down);});
-        moveLeftButton.onClick.AddListener(() => {RebindBinding(PlayerInput.Binding.Move_Left);});
-        moveRightButton.onClick.AddListener(() => {RebindBinding(PlayerInput.Binding.Move_Right);});
-        interactButton.onClick.AddListener(() => {RebindBinding(PlayerInput.Binding.Interact);});
-        interactAltButton.onClick.AddListener(() => {RebindBinding(PlayerInput.Binding.InteractAlternate);});
-        pauseButton.onClick.AddListener(() => {RebindBinding(PlayerInput.Binding.Pause);});
+        sfxButton.Select();
     }
 
     private void Start()
     {
+        GameManager.Instance.OnGameUnpaused += GameManager_OnGameUnpaused;
+        SoundManager.OnVolumeChange += SoundManager_OnVolumeChange;
+        MusicManager.OnVolumeChange += MusicManager_OnVolumeChange;
+        moveUpButton.onClick.AddListener(() => { RebindBinding(PlayerInput.Binding.Move_Up); });
+        moveDownButton.onClick.AddListener(() => { RebindBinding(PlayerInput.Binding.Move_Down); });
+        moveLeftButton.onClick.AddListener(() => { RebindBinding(PlayerInput.Binding.Move_Left); });
+        moveRightButton.onClick.AddListener(() => { RebindBinding(PlayerInput.Binding.Move_Right); });
+        interactButton.onClick.AddListener(() => { RebindBinding(PlayerInput.Binding.Interact); });
+        interactAltButton.onClick.AddListener(() => { RebindBinding(PlayerInput.Binding.InteractAlternate); });
+        pauseButton.onClick.AddListener(() => { RebindBinding(PlayerInput.Binding.Pause); });
         KeyBindingsTextUpdate();
         PopUpActive(false);
         UIActive(false);
