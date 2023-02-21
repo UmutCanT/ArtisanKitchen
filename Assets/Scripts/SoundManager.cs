@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -14,7 +13,7 @@ public class SoundManager : MonoBehaviour
         public float volume; 
     }
 
-    private const float DEFAULT_VOLUME = .4f;
+    private const float DEFAULT_VOLUME = 1f;
 
     [SerializeField] AudioClipReferences audioClipReferences;
 
@@ -35,6 +34,8 @@ public class SoundManager : MonoBehaviour
         BaseCounter.OnAnyObjectDropped += BaseCounter_OnAnyObjectDropped;
         TrashCounter.OnAnyObjectThrashed += TrashCounter_OnAnyObjectThrashed;
         PlayerSounds.OnStep += PlayerSounds_OnStep;
+        CountdownUI.OnCountdownNumberChange += CountdownUI_OnCountdownNumberChange;
+        StoveCounterSound.OnWarning += StoveCounterSound_OnWarning;
     }
 
     private void OnDestroy()
@@ -44,6 +45,8 @@ public class SoundManager : MonoBehaviour
         BaseCounter.OnAnyObjectDropped -= BaseCounter_OnAnyObjectDropped;
         TrashCounter.OnAnyObjectThrashed -= TrashCounter_OnAnyObjectThrashed;
         PlayerSounds.OnStep -= PlayerSounds_OnStep;
+        CountdownUI.OnCountdownNumberChange -= CountdownUI_OnCountdownNumberChange;
+        StoveCounterSound.OnWarning -= StoveCounterSound_OnWarning;
     }
 
     public void ChangeVolume()
@@ -58,6 +61,17 @@ public class SoundManager : MonoBehaviour
         { 
             volume = volume 
         });
+    }
+
+    private void StoveCounterSound_OnWarning(object sender, EventArgs e)
+    {
+        StoveCounterSound warning = sender as StoveCounterSound;
+        PlaySoundEffect(audioClipReferences.Warning, warning.transform.position);
+    }
+
+    private void CountdownUI_OnCountdownNumberChange(object sender, EventArgs e)
+    {
+        PlaySoundEffect(audioClipReferences.Warning, Vector3.zero);
     }
 
     private void PlayerSounds_OnStep(object sender, System.EventArgs e)
