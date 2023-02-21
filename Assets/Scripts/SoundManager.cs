@@ -14,7 +14,7 @@ public class SoundManager : MonoBehaviour
         public float volume; 
     }
 
-    private const float DEFAULT_VOLUME = .4f;
+    private const float DEFAULT_VOLUME = 1f;
 
     [SerializeField] AudioClipReferences audioClipReferences;
 
@@ -35,7 +35,8 @@ public class SoundManager : MonoBehaviour
         BaseCounter.OnAnyObjectDropped += BaseCounter_OnAnyObjectDropped;
         TrashCounter.OnAnyObjectThrashed += TrashCounter_OnAnyObjectThrashed;
         PlayerSounds.OnStep += PlayerSounds_OnStep;
-    }
+        CountdownUI.OnCountdownNumberChange += CountdownUI_OnCountdownNumberChange;
+    }  
 
     private void OnDestroy()
     {
@@ -44,6 +45,7 @@ public class SoundManager : MonoBehaviour
         BaseCounter.OnAnyObjectDropped -= BaseCounter_OnAnyObjectDropped;
         TrashCounter.OnAnyObjectThrashed -= TrashCounter_OnAnyObjectThrashed;
         PlayerSounds.OnStep -= PlayerSounds_OnStep;
+        CountdownUI.OnCountdownNumberChange -= CountdownUI_OnCountdownNumberChange;
     }
 
     public void ChangeVolume()
@@ -58,6 +60,11 @@ public class SoundManager : MonoBehaviour
         { 
             volume = volume 
         });
+    }
+   
+    private void CountdownUI_OnCountdownNumberChange(object sender, EventArgs e)
+    {
+        PlaySoundEffect(audioClipReferences.Warning, Vector3.zero);
     }
 
     private void PlayerSounds_OnStep(object sender, System.EventArgs e)
