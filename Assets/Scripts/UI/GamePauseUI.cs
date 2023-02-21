@@ -24,6 +24,11 @@ public class GamePauseUI : MonoBehaviour
         UIActive(false);
     }
 
+    private void OnEnable()
+    {
+        resumeButton.Select();
+    }
+
     private void GameManager_OnGameUnpaused(object sender, System.EventArgs e)
     {
         UIActive(false);
