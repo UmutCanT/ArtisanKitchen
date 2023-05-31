@@ -1,9 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class Player : MonoBehaviour, ICanCarryKitchenObject
+public class Player : NetworkBehaviour, ICanCarryKitchenObject
 {
     public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
     public static event EventHandler OnObjectPickUp;
